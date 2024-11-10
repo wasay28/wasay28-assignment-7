@@ -50,9 +50,10 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
         Y_sim = beta0 + beta1 * X_sim.flatten() + mu + error_sim  # Replace with code to generate simulated Y values
 
         # TODO 7: Fit linear regression to simulated data and store slope and intercept
-        sim_model = None  # Replace with code to fit the model
-        sim_slope = None  # Extract slope from sim_model
-        sim_intercept = None  # Extract intercept from sim_model
+        sim_model = LinearRegression()  # Replace with code to fit the model
+        sim_model.fit(X_sim, Y_sim)
+        sim_slope = sim_model.coef_[0]  # Extract slope from sim_model
+        sim_intercept = sim_model.intercept_  # Extract intercept from sim_model
 
         slopes.append(sim_slope)
         intercepts.append(sim_intercept)
