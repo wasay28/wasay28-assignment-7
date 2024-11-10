@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, session
 import numpy as np
 import matplotlib
 import time
+import statistics as stats
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -264,11 +265,14 @@ def confidence_interval():
 
     # TODO 15: Calculate confidence interval for the parameter estimate
     # Use the t-distribution and confidence_level
-    ci_lower = None
-    ci_upper = None
+    df = len(estimates) - 1
+    t_value = stats.t.ppf((1 + confidence_level/100)/2, df)
+    margin_error = t_value * (std_estimate / np.sqrt(len(estimates)))
+    ci_lower = mean_estimate - margin_error
+    ci_upper = mean_estimate + margin_error
 
     # TODO 16: Check if confidence interval includes true parameter
-    includes_true = None
+    includes_true = ci_lower <= true_param <= ci_upper
 
     # TODO 17: Plot the individual estimates as gray points and confidence interval
     # Plot the mean estimate as a colored point which changes if the true parameter is included
