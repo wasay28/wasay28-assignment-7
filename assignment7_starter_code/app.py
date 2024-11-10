@@ -45,8 +45,9 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
 
     for _ in range(S):
         # TODO 6: Generate simulated datasets using the same beta0 and beta1
-        X_sim = None  # Replace with code to generate simulated X values
-        Y_sim = None  # Replace with code to generate simulated Y values
+        X_sim = np.random.uniform(0, 1, N).reshape(-1, 1)
+        error_sim = np.random.normal(0, np.sqrt(sigma2), N)  # Replace with code to generate simulated X values
+        Y_sim = beta0 + beta1 * X_sim.flatten() + mu + error_sim  # Replace with code to generate simulated Y values
 
         # TODO 7: Fit linear regression to simulated data and store slope and intercept
         sim_model = None  # Replace with code to fit the model
