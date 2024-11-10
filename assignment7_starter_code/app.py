@@ -14,11 +14,12 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
     # Generate data and initial plots
 
     # TODO 1: Generate a random dataset X of size N with values between 0 and 1
-    X = None  # Replace with code to generate random values for X
+    X = np.random.uniform(0, 1, N).reshape(-1, 1)  # Replace with code to generate random values for X
 
     # TODO 2: Generate a random dataset Y using the specified beta0, beta1, mu, and sigma2
     # Y = beta0 + beta1 * X + mu + error term
-    Y = None  # Replace with code to generate Y
+    error = np.random.normal(0, np.sqrt(sigma2), N)
+    Y = beta0 + beta1 * X.flatten() + mu + error  # Replace with code to generate Y
 
     # TODO 3: Fit a linear regression model to X and Y
     model = None  # Initialize the LinearRegression model
