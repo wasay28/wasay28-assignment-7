@@ -74,8 +74,8 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
 
     # TODO 9: Return data needed for further analysis, including slopes and intercepts
     # Calculate proportions of slopes and intercepts more extreme than observed
-    slope_more_extreme = None  # Replace with code to calculate proportion of slopes more extreme than observed
-    intercept_extreme = None  # Replace with code to calculate proportion of intercepts more extreme than observed
+    slope_more_extreme = sum(s > slope for s in slopes) / S  # Replace with code to calculate proportion of slopes more extreme than observed
+    intercept_extreme = sum(i < intercept for i in intercepts) / S  # Replace with code to calculate proportion of intercepts more extreme than observed
 
     # Return data needed for further analysis
     return (
@@ -83,8 +83,8 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
         Y,
         slope,
         intercept,
-        plot1_path,
-        plot2_path,
+        'static/plot1.png',
+        'static/plot2.png',
         slope_more_extreme,
         intercept_extreme,
         slopes,
