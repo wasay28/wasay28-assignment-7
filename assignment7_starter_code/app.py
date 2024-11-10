@@ -22,8 +22,8 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
     Y = beta0 + beta1 * X.flatten() + mu + error  # Replace with code to generate Y
 
     # TODO 3: Fit a linear regression model to X and Y
-    model = None  # Initialize the LinearRegression model
-    # None  # Fit the model to X and Y
+    model = LinearRegression()  # Initialize the LinearRegression model
+    model.fit(X, Y)  # Fit the model to X and Y
     slope = None  # Extract the slope (coefficient) from the fitted model
     intercept = None  # Extract the intercept from the fitted model
 
