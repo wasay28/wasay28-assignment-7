@@ -24,8 +24,8 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
     # TODO 3: Fit a linear regression model to X and Y
     model = LinearRegression()  # Initialize the LinearRegression model
     model.fit(X, Y)  # Fit the model to X and Y
-    slope = None  # Extract the slope (coefficient) from the fitted model
-    intercept = None  # Extract the intercept from the fitted model
+    slope = model.coef_[0]  # Extract the slope (coefficient) from the fitted model
+    intercept = model.intercept_  # Extract the intercept from the fitted model
 
     # TODO 4: Generate a scatter plot of (X, Y) with the fitted regression line
     plot1_path = "static/plot1.png"
