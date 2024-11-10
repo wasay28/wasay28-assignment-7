@@ -278,15 +278,27 @@ def confidence_interval():
     # Plot the mean estimate as a colored point which changes if the true parameter is included
     # Plot the confidence interval as a horizontal line
     # Plot the true parameter value
-    plot4_path = "static/plot4.png"
+    plt.figure(figsize=(10, 6))
+    plt.scatter(range(len(estimates)), estimates, color='gray', alpha=0.3, label='Individual estimates')
+    plt.axhline(y=true_param, color='red', linestyle='--', label='True parameter')
+    plt.axhline(y=mean_estimate, color='blue' if includes_true else 'orange', label='Mean estimate')
+    plt.axhspan(ci_lower, ci_upper, alpha=0.2, color='blue' if includes_true else 'orange', 
+                label=f'{confidence_level}% Confidence Interval')
+    plt.title(f'Confidence Interval for {parameter.capitalize()}')
+    plt.xlabel('Simulation Index')
+    plt.ylabel(f'{parameter.capitalize()} Value')
+    plt.legend()
+    plt.savefig('static/plot4.png')
+    plt.close()
     # Write code here to generate and save the plot
 
     # Return results to template
+    timestamp = str(time.time())
     return render_template(
         "index.html",
         plot1="static/plot1.png",
         plot2="static/plot2.png",
-        plot4=plot4_path,
+        plot4=f"static/plot4.png?t={timestamp}",
         parameter=parameter,
         confidence_level=confidence_level,
         mean_estimate=mean_estimate,
