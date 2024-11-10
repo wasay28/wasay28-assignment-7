@@ -28,7 +28,15 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
     intercept = model.intercept_  # Extract the intercept from the fitted model
 
     # TODO 4: Generate a scatter plot of (X, Y) with the fitted regression line
-    plot1_path = "static/plot1.png"
+    plt.figure(figsize=(8, 6))
+    plt.scatter(X, Y, color='blue', alpha=0.5, label='Data Points')
+    plt.plot(X, model.predict(X), color='red', label='Fitted Line')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title(f'Linear Regression (y = {slope:.2f}x + {intercept:.2f})')
+    plt.legend()
+    plt.savefig('static/plot1.png')
+    plt.close()
     # Replace with code to generate and save the scatter plot
 
     # TODO 5: Run S simulations to generate slopes and intercepts
