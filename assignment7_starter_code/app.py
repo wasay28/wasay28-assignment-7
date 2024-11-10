@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, session
 import numpy as np
 import matplotlib
+import time
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -197,15 +198,25 @@ def hypothesis_test():
     fun_message = "Wow! You've found an extremely rare event! 🎉" if p_value <= 0.0001 else None
 
     # TODO 12: Plot histogram of simulated statistics
-    plot3_path = "static/plot3.png"
+    plt.figure(figsize=(10, 6))
+    plt.hist(simulated_stats, bins=30, density=True, alpha=0.7, color='skyblue')
+    plt.axvline(observed_stat, color='red', linestyle='--', label=f'Observed {parameter}')
+    plt.axvline(hypothesized_value, color='green', linestyle='--', label='Hypothesized value')
+    plt.title(f'Distribution of Simulated {parameter.capitalize()}s')
+    plt.xlabel(f'{parameter.capitalize()} Value')
+    plt.ylabel('Density')
+    plt.legend()
+    plt.savefig('static/plot3.png')
+    plt.close()
     # Replace with code to generate and save the plot
 
     # Return results to template
+    timestamp = str(time.time())
     return render_template(
         "index.html",
         plot1="static/plot1.png",
         plot2="static/plot2.png",
-        plot3=plot3_path,
+        plot3=f"static/plot3.png?t={timestamp}",
         parameter=parameter,
         observed_stat=observed_stat,
         hypothesized_value=hypothesized_value,
@@ -214,8 +225,8 @@ def hypothesis_test():
         beta1=beta1,
         S=S,
         # TODO 13: Uncomment the following lines when implemented
-        # p_value=p_value,
-        # fun_message=fun_message,
+        p_value=p_value,
+        fun_message=fun_message,
     )
 
 @app.route("/confidence_interval", methods=["POST"])
