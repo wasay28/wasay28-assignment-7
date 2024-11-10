@@ -91,6 +91,15 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
         intercepts,
     )
 
+def calculate_p_value(simulated_stats, observed_stat, test_type):
+    if test_type == 'greater':
+        return np.mean(simulated_stats >= observed_stat)
+    elif test_type == 'less':
+        return np.mean(simulated_stats <= observed_stat)
+    else:  # two-sided test
+        abs_diff = np.abs(simulated_stats - np.mean(simulated_stats))
+        obs_diff = np.abs(observed_stat - np.mean(simulated_stats))
+        return np.mean(abs_diff >= obs_diff)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -182,10 +191,10 @@ def hypothesis_test():
         hypothesized_value = beta0
 
     # TODO 10: Calculate p-value based on test type
-    p_value = None
+    p_value = calculate_p_value(simulated_stats, observed_stat, test_type)
 
     # TODO 11: If p_value is very small (e.g., <= 0.0001), set fun_message to a fun message
-    fun_message = None
+    fun_message = "Wow! You've found an extremely rare event! 🎉" if p_value <= 0.0001 else None
 
     # TODO 12: Plot histogram of simulated statistics
     plot3_path = "static/plot3.png"
