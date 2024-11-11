@@ -94,9 +94,9 @@ def generate_data(N, mu, beta0, beta1, sigma2, S):
     )
 
 def calculate_p_value(simulated_stats, observed_stat, test_type):
-    if test_type == 'greater':
+    if test_type == "Greater than ( > )":
         return np.mean(simulated_stats >= observed_stat)
-    elif test_type == 'less':
+    elif test_type == "Less than ( < )":
         return np.mean(simulated_stats <= observed_stat)
     else:  # two-sided test
         abs_diff = np.abs(simulated_stats - np.mean(simulated_stats))
