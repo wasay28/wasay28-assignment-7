@@ -215,8 +215,8 @@ def hypothesis_test():
     timestamp = str(time.time())
     return render_template(
         "index.html",
-        plot1="static/plot1.png",
-        plot2="static/plot2.png",
+        plot1=f"static/plot1.png?t={timestamp}",
+        plot2=f"static/plot2.png?t={timestamp}",
         plot3=f"static/plot3.png?t={timestamp}",
         parameter=parameter,
         observed_stat=observed_stat,
@@ -296,8 +296,8 @@ def confidence_interval():
     timestamp = str(time.time())
     return render_template(
         "index.html",
-        plot1="static/plot1.png",
-        plot2="static/plot2.png",
+        plot1=f"static/plot1.png?t={timestamp}",
+        plot2=f"static/plot2.png?t={timestamp}",
         plot4=f"static/plot4.png?t={timestamp}",
         parameter=parameter,
         confidence_level=confidence_level,
