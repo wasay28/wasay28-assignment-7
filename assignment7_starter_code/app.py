@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, session
 import numpy as np
 import matplotlib
 import time
-import statistics as stats
+from scipy import stats
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
